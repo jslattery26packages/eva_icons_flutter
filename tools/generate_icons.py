@@ -22,7 +22,7 @@ def extract_git_template():
     content = result.stdout
     
     # Find all static const IconData definitions
-    pattern = r'static const IconData (\w+) = EvaIconData\(0x([a-fA-F0-9]+)\);'
+    pattern = r"static const IconData (\w+) = IconData\(0x([a-fA-F0-9]+), fontFamily: 'EvaIcons', fontPackage: 'eva_icons_flutter'\);"
     matches = re.findall(pattern, content)
     
     git_icons = {}
@@ -81,13 +81,12 @@ def generate_dart_file_from_template(git_template, font_mappings, output_path):
         constant = f'''  /// {display_name} icon
   ///
   /// https://akveo.github.io/eva-icons/#/?type={icon_type}&searchKey={search_key}
-  static const IconData {dart_name} = EvaIconData(0x{char_code:04x});'''
-        
+  static const IconData {dart_name} = IconData(0x{char_code:04x}, fontFamily: 'EvaIcons', fontPackage: 'eva_icons_flutter');'''
+
         constants.append(constant)
-    
+
     # Generate the complete file
     header = '''import 'package:flutter/widgets.dart';
-import 'icon_data.dart';
 /// Icons based on Eva Icons
 ///
 /// https://akveo.github.io/eva-icons/#/

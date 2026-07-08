@@ -79,7 +79,7 @@ class EvaIcons {
   /// Activity icon
   ///
   /// https://akveo.github.io/eva-icons/#/?searchKey=activity
-  static const IconData activity = EvaIconData(0xea01);
+  static const IconData activity = IconData(0xea01, fontFamily: 'EvaIcons', fontPackage: 'eva_icons_flutter');
   
   // ... more icons
 }
